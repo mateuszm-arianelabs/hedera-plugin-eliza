@@ -21,6 +21,7 @@ import { getTopicMessagesAction } from "./actions/get-topic-messages/get-topic-m
 import { mintTokenAction } from "./actions/mint-token/mint-token.ts";
 import { setSpendingApprovalAction } from "./actions/set-spending-approval/set-spending-approval.ts";
 import { createNFTTokenAction } from "./actions/create-nft-token/create-nft-token.ts";
+import { mintNFTTokenAction } from "./actions/mint-nft-token/mint-token.ts";
 
 export const hederaPlugin: Plugin = {
     name: "Hedera",
@@ -48,6 +49,8 @@ export const hederaPlugin: Plugin = {
         submitTopicMessageAction,
         getTopicMessagesAction,
         mintTokenAction,
+        createNFTTokenAction,
+        mintNFTTokenAction,
         setSpendingApprovalAction,
         createNFTTokenAction
     ],
