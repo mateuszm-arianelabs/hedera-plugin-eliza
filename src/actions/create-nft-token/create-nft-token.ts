@@ -28,6 +28,8 @@ export const createNFTTokenAction: Action = {
         callback?: HandlerCallback,
     ) => {
         try {
+            state.lastMessage = state.recentMessagesData[1].content.text;
+
             const hederaCreateNFTTokenContext = composeContext({
                 state: state,
                 template: hederaCreateNFTTokenTemplate,

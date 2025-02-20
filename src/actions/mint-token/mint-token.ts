@@ -27,6 +27,8 @@ export const mintTokenAction = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaMintTokenContext = composeContext({
             state: state,
             template: mintTokenTemplate,

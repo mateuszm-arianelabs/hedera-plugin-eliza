@@ -29,6 +29,8 @@ export const balancesAllTokensAction = {
         _options: { [key: string]: unknown },
         _callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaAllTokensBalancesContext = composeContext({
             state: state,
             template: balancesAllTokensTemplate,

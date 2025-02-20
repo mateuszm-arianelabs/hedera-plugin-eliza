@@ -27,6 +27,8 @@ export const submitTopicMessageAction = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaSubmitTopicMessageContext = composeContext({
             state: state,
             template: submitTopicMessageTemplate,

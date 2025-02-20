@@ -26,6 +26,8 @@ export const claimAirdropAction: Action = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const claimAirdropContext = composeContext({
             state: state,
             template: claimAirdropTemplate,
