@@ -32,54 +32,44 @@ Now respond with a JSON markdown block containing only the extracted values.
 export const hederaCreateTokenTemplate = `Given the last message:
 {{lastMessage}}
 Extract the following information about the token to create on hedera blockchain:
+
 1. **Token name**:
-   - Extract name of the token.
-   - The value must be a string representing the name of the new token.
-
+   - Extract the name of the token as a string.
 2. **Token Symbol**:
-   - The token symbol is specified as a string.
-   - The string should contains only capitalized letters.
-
+   - Extract the symbol as a string with only capitalized letters.
 3. **Decimals**:
-   - Extract only the numeric value from the instruction.
-   - The number of decimal places a token is divisible by.
-
+   - Extract the numeric value for the number of decimals.
 4. **Initial Supply**:
-   - Extract only the numeric value from the instruction.
-   - Specifies the initial supply of fungible tokens to be put in circulation.
+   - Extract the numeric value for the initial supply of tokens.
 
 5. **Is Supply Key**:
-   - boolean - true or false
-   - defines if account creating the token can mint additional tokens
-   - extract information about the supplyKey from user prompt.
-   - If information is present, set it to true.
-   - If there is no information about supplyKey or it's explicitly said to set it to false in parsed request set it to false!
+   - Boolean - true or false.
+   - **Set to true only if** the user explicitly instructs “set the supply key” or similar phrasing.
+   - If there is no explicit instruction or the user explicitly states not to set it, set this to false.
    
-4. **Is Metadata Key**:
+6. **Is Metadata Key**:
    - Boolean - true or false.
-   - Defines if the metadata key is set for the token.
-   - Extract whether metadata key should be enabled (true) or disabled (false).
-   - If there is no information about metadata key or it's explicitly said to not set it, set it to false.
-
-5. **Is Admin Key**:
+   - **Set to true only if** the user explicitly instructs “set the metadata key” or similar phrasing.
+   - Otherwise, even if token metadata is provided, set to false.
+   
+7. **Is Admin Key**:
    - Boolean - true or false.
-   - Defines if the admin key is set for the token.
-   - Extract whether the admin key should be enabled (true) or disabled (false).
-   - If there is no information about admin key or it's explicitly said to not set it, set it to false.
+   - **Set to true only if** the user explicitly instructs “set the admin key” or similar phrasing.
+   - Otherwise, set to false.
+   
+8. **Token Metadata**:
+   - Must be a string or null.
+   - If provided, extract the token metadata value.
+   - If not provided, leave it as null.
+   
+9. **Memo**:
+   - Must be a string or null.
+   - If provided, extract the memo content.
+   - If not provided, leave it as null.
 
-6. **Token Metadata**:
-   - Must be a string
-   - Optional metadata for the NFT token (string).
-   - If included, extract the value.
-   - If not provided, leave it empty.
-
-7. **Memo**:
-   - Must be a string
-   - Optional field for adding a memo or description for the token creation.
-   - If present, extract the memo content.
+Make sure that the extraction differentiates between providing a value (e.g. initial supply or token metadata) and explicitly requesting to set the corresponding key.
 
 Respond with a JSON markdown block containing only the extracted values. Only name, symbol, decimals and initialSupply are required!
-Keep in mind that passing token metadata string does not set the isMetadataKey to true. User might want to add the string but don't set the key.
 \`\`\`json
 {
     "name": string,
