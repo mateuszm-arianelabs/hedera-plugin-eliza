@@ -41,7 +41,7 @@ export class CreateTokenService {
             isSupplyKey: params.isSupplyKey,
             isMetadataKey: params.isMetadataKey,
             isAdminKey: params.isAdminKey,
-            tokenMetadata: new TextEncoder().encode(params.tokenMetadata),
+            tokenMetadata: params.tokenMetadata ? new TextEncoder().encode(params.tokenMetadata) : null,
             memo: params.memo,
         };
 
