@@ -33,7 +33,7 @@ export const castToBoolean = z.preprocess((val) => {
         if (val.toLowerCase() === 'false') return false;
         else return false; // false is default
     }
-    return val; // Return the value as is if it's not a strings
+    return val; // Return the value as is if it's not a string
 }, z.boolean());
 
 // Custom preprocess to handle LLMs extracting mistakes
