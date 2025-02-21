@@ -24,7 +24,7 @@ export class AllTokensBalancesActionService {
         const agentKit: HederaAgentKit =
             this.hederaProvider.getHederaAgentKit();
         const balancesArray: Array<DetailedTokenBalance> =
-            await agentKit.getAllTokensBalances(networkType, params.address);
+            await agentKit.getAllTokensBalances(networkType, params.address as string);
 
         return {
             status: TxStatus.SUCCESS,

@@ -40,3 +40,6 @@ export const castToBoolean = z.preprocess((val) => {
 // Sometimes null values are returned as strings and require parsing
 export const castToNull = (value: any) => (value === "null" ? null : value);
 
+export const castToEmptyString = (value: any) => (value === "null" ? "" : value);
+
+

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { castToBoolean, castToNull } from "../../shared/utils.ts";
+import { castToBoolean, castToEmptyString, castToNull } from "../../shared/utils.ts";
 
 export const createNFTTokenParamsSchema = z.object({
     name: z.string(),
@@ -17,6 +17,6 @@ export const createNFTTokenParamsSchema = z.object({
         }),
     isMetadataKey: castToBoolean,
     isAdminKey: castToBoolean,
-    tokenMetadata: z.string().optional().nullable().transform(castToNull),
-    memo: z.string().optional().nullable().transform(castToNull),
+    tokenMetadata: z.string().nullable().transform(castToEmptyString),
+    memo: z.string().nullable().transform(castToEmptyString),
 });
