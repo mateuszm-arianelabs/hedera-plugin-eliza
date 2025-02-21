@@ -33,10 +33,13 @@ export const castToBoolean = z.preprocess((val) => {
         if (val.toLowerCase() === 'false') return false;
         else return false; // false is default
     }
-    return val; // Return the value as is if it's not a string
+    return val; // Return the value as is if it's not a strings
 }, z.boolean());
 
 // Custom preprocess to handle LLMs extracting mistakes
 // Sometimes null values are returned as strings and require parsing
 export const castToNull = (value: any) => (value === "null" ? null : value);
+
+export const castToEmptyString = (value: any) => (value === "null" ? "" : value);
+
 

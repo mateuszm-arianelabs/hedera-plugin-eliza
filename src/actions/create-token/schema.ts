@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { castToBoolean, castToNull } from "../../shared/utils.ts";
+import { castToBoolean, castToEmptyString } from "../../shared/utils.ts";
 
 export const createTokenParamsSchema = z.object({
     symbol: z.string(),
@@ -9,6 +9,6 @@ export const createTokenParamsSchema = z.object({
     isSupplyKey: castToBoolean,
     isMetadataKey: castToBoolean,
     isAdminKey: castToBoolean,
-    tokenMetadata: z.string().optional().nullable().transform(castToNull),
-    memo: z.string().optional().nullable().transform(castToNull),
+    tokenMetadata: z.string().nullable().transform(castToEmptyString),
+    memo: z.string().nullable().transform(castToEmptyString),
 });

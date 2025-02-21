@@ -41,8 +41,8 @@ export class CreateTokenService {
             isSupplyKey: params.isSupplyKey,
             isMetadataKey: params.isMetadataKey,
             isAdminKey: params.isAdminKey,
-            tokenMetadata: params.tokenMetadata ? new TextEncoder().encode(params.tokenMetadata) : null,
-            memo: params.memo,
+            tokenMetadata: new TextEncoder().encode(params.tokenMetadata as string),
+            memo: params.memo as string,
         };
 
         return agentKit.createFT(options);
