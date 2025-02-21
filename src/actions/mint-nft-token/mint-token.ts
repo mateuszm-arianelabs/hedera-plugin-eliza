@@ -27,6 +27,8 @@ export const mintNFTTokenAction = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaMintNFTTokenContext = composeContext({
             state: state,
             template: mintNFTTokenTemplate,

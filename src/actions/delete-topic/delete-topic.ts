@@ -27,6 +27,8 @@ export const deleteTopicAction: Action = {
         callback?: HandlerCallback
     ) => {
         try {
+            state.lastMessage = state.recentMessagesData[1].content.text;
+
             const deleteTopicContext = composeContext({
                 state,
                 template: hederaDeleteTopicTemplate,

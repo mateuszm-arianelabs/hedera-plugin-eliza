@@ -26,6 +26,8 @@ export const rejectTokenAction = {
         _options: { [key: string]: unknown },
         _callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaRejectTokenContext = composeContext({
             state: state,
             template: rejectTokenTemplate,

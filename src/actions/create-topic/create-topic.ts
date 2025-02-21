@@ -27,6 +27,8 @@ export const createTopicAction: Action = {
         callback?: HandlerCallback
     ) => {
         try {
+            state.lastMessage = state.recentMessagesData[1].content.text;
+
             const createTopicContext = composeContext({
                 state,
                 template: hederaCreateTopicTemplate,

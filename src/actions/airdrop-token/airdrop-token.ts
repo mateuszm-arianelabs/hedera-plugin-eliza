@@ -27,6 +27,8 @@ export const airdropTokenAction: Action = {
         callback?: HandlerCallback
     ) => {
         try {
+            state.lastMessage = state.recentMessagesData[1].content.text;
+
             const hederaAirdropTokenContext = composeContext({
                 state: state,
                 template: hederaAirdropTokenTemplate,

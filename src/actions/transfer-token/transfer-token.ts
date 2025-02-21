@@ -27,6 +27,8 @@ export const transferTokenAction: Action = {
         callback?: HandlerCallback
     ) => {
         try {
+            state.lastMessage = state.recentMessagesData[1].content.text;
+
             const hederaTokenTransferContext = composeContext({
                 state: state,
                 template: hederaTransferTokenTemplate,

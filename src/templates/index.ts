@@ -1,6 +1,5 @@
-export const hederaHBARTransferTemplate = `Given the recent messages and hedera wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const hederaHBARTransferTemplate = `Given the last message:
+{{lastMessage}}
 Extract the following information about the requested HBAR transfer:
 1. **Amount**:
    - Extract only the numeric value from the instruction.
@@ -30,9 +29,8 @@ Example response for the input: "Make transfer 0.10HBAR to 0.0.4515512", the res
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const hederaCreateTokenTemplate = `Given the recent messages and hedera wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const hederaCreateTokenTemplate = `Given the last message:
+{{lastMessage}}
 Extract the following information about the token to create on hedera blockchain:
 1. **Token name**:
    - Extract name of the token.
@@ -80,8 +78,6 @@ Extract the following information about the token to create on hedera blockchain
    - Optional field for adding a memo or description for the token creation.
    - If present, extract the memo content.
 
-
-Always try to extract the information from last message! Do not use previously completed requests data to fill extracted information!
 Respond with a JSON markdown block containing only the extracted values. Only name, symbol, decimals and initialSupply are required!
 Keep in mind that passing token metadata string does not set the isMetadataKey to true. User might want to add the string but don't set the key.
 \`\`\`json
@@ -146,9 +142,8 @@ Example response for the input: "Create new token with name NextToken with symbo
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const hederaCreateNFTTokenTemplate = `Given the hedera wallet information below:
-{{walletInfo}}
-And last message from user in: {{recentMessages}}
+export const hederaCreateNFTTokenTemplate = `Given the last message:
+{{lastMessage}}
 
 Extract the following information about the NFT token to create on hedera blockchain:
 1. **Token name**:
@@ -264,9 +259,9 @@ Now respond with a JSON markdown block containing only the extracted values.
 `;
 
 
-export const hederaAirdropTokenTemplate = `Given the recent messages and hedera wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const hederaAirdropTokenTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about the token airdrop in hedera using newest message from {{recentMessages}}:
 1. **Token id**:
    - Extract id of the token to airdrop.
@@ -314,9 +309,9 @@ Example response for the input: "Airdrop 50 tokens 0.0.5425085 for 0.0.5398121."
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const pendingAirdropTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const pendingAirdropTemplate = `Given the last message:
+{{lastMessage}}
+
 If in message there is no accountId or anything that looks similar to accountId for example: "0.0.5422268", return this json.
 \`\`\`json
 {
@@ -369,9 +364,9 @@ Example response for the input: "Show me airdrops for 0.0.5422268", the response
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const claimAirdropTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const claimAirdropTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract data of pending token airdrop from message with following instructions.
 1. **Sender Id**
     - Sender Id should look like "0.0.5422268" and should be a string.
@@ -414,9 +409,9 @@ Example response for the input: "Claim airdrop (2) 50 Tokens (0.0.5447843) from 
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const hederaTransferTokenTemplate = `Given the recent messages and hedera wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const hederaTransferTokenTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about the token transaction:
 1. **tokenId**:
    - Extract id of the token.
@@ -451,9 +446,9 @@ Example response for the input: "Make transfer 3.10 of tokens 0.0.5425085 to acc
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const hederaCreateTopicTemplate = `Given the recent messages and hedera wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const hederaCreateTopicTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about the new topic:
 1. **Topic memo**:
    - Extract string representing memo of topic.
@@ -511,9 +506,9 @@ Example response for the input: "Create new topic with memo: "token transfer log
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const hederaDeleteTopicTemplate = `Given the recent messages and hedera wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const hederaDeleteTopicTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about the topic to delete:
 1. **Topic Id**
     - Topic Id should look like "0.0.5422268" and should be a string.
@@ -545,9 +540,9 @@ Example response for the input: "Delete topic 0.0.5464185", the response should 
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const balanceHbarTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const balanceHbarTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about HBAR balance:
 1. **Wallet Address**:
    - must be a string. Do not include dot after last character. Example of correct address: "0.0.539314"
@@ -582,9 +577,8 @@ Example response for the input: "Show me HBAR balance of wallet 0.0.539314.", th
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const balanceHtsTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const balanceHtsTemplate = `Given the last message:
+{{lastMessage}}
 
 Extract the data about last request. Do not use earlier provided wallet addresses nor token Ids.
 
@@ -624,9 +618,9 @@ Example response for the input: "Show me balance of HTS-TOKEN with id 0.0.542226
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const balancesAllTokensTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const balancesAllTokensTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about all tokens balances request:
 1. **Wallet Address**:
    - must be a string. Do not include dot after last character. **OPTIONAL PARAMETER!!!**
@@ -657,9 +651,9 @@ Example response for the input: "Show me your token balances", the response shou
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const rejectTokenTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const rejectTokenTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about rejecting token request:
 1. **Token id**:
    - must be a string. Do not include dot after last character. Example of correct token id: "0.0.539314".
@@ -689,9 +683,9 @@ Example response for the input: "Reject received airdrop of token 0.0.539314.", 
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const associateTokenTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const associateTokenTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about associating tokens with account:
 1. **Token id**
     - Must be a string Do not include dot after last character. Example of correct tokenId: "0.0.5422268".
@@ -720,9 +714,9 @@ Example response for the input: "Associate wallet with token 0.0.5422333", the r
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const dissociateTokenTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const dissociateTokenTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about dissociating tokens with account:
 1. **Token id**
     - Must be a string. Do not include dot after last character. Example of correct tokenId: "0.0.5422268".
@@ -751,9 +745,9 @@ Example response for the input: "Dissociate wallet with token 0.0.5422333", the 
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const tokenHoldersTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const tokenHoldersTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information about all tokens balances request:
 1. **Token Id**:
    - must be a string. Do not include dot after last character. Example of correct token id: "0.0.539314".
@@ -787,8 +781,9 @@ Example response for the input: "Who owns token 0.0.5432123 and what are their b
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const topicInfoTemplate = `Given the recent messages
-{{recentMessages}}
+export const topicInfoTemplate = `Given the last message:
+{{lastMessage}}
+
 Extract the following information requested topic id:
 1. **Topic Id**:
    - must be a string. Do not include dot after last character. Example of correct topic id: "0.0.5469474".
@@ -818,9 +813,8 @@ Example response for the input: "Show me details for topic 0.0.5469475" the resp
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const submitTopicMessageTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const submitTopicMessageTemplate = `Given the last message:
+{{lastMessage}}
 
 Extract the following information about message to submit to topic request:
 1. **Topic Id**:
@@ -865,9 +859,8 @@ Example response for the input: "I want post to topic 0.0.5423966. Message: test
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const getTopicMessagesTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const getTopicMessagesTemplate = `Given the last message:
+{{lastMessage}}
 
 Using only last message extract the following information about message to submit to topic request:
 1. **Topic Id**:
@@ -928,9 +921,8 @@ Example response for the input: "Show me messages from topic 0.0.123456 posted b
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const mintTokenTemplate = `Given the recent messages and wallet information below:
-{{recentMessages}}
-{{walletInfo}}
+export const mintTokenTemplate = `Given the last message:
+{{lastMessage}}
 
 Extract the following information about message to submit to topic request:
 1. **Token Id**:
@@ -968,8 +960,8 @@ Example response for the input: "Increase supply of token 0.0.5423991 by 100000"
 Now respond with a JSON markdown block containing only the extracted values.
 `;
 
-export const getSpendingAllowanceTemplate = `Given the wallet information below:
-{{walletInfo}}
+export const getSpendingAllowanceTemplate = `Given the last message:
+{{lastMessage}}
 
 And last message from user in {{recentMessages}}
 
@@ -1015,9 +1007,8 @@ Example response for the input: "Set spending approval for an account 0.0.123456
 
 Now respond with a JSON markdown block containing only the extracted values.
 `;
-export const mintNFTTokenTemplate = `Given the wallet information:
-{{walletInfo}}
-And using last user message from: {{recentMessages}}. 
+export const mintNFTTokenTemplate = `Given the last message:
+{{lastMessage}}
 
 Extract the following information about minting NFT token:
 1. **Token Id**:

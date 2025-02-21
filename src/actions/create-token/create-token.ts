@@ -28,6 +28,8 @@ export const createTokenAction: Action = {
         callback?: HandlerCallback
     ) => {
         try {
+            state.lastMessage = state.recentMessagesData[1].content.text;
+
             const hederaCreateTokenContext = composeContext({
                 state: state,
                 template: hederaCreateTokenTemplate,

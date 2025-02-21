@@ -27,6 +27,8 @@ export const dissociateTokenAction = {
         _options: { [key: string]: unknown },
         _callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaDissociateTokenContext = composeContext({
             state: state,
             template: dissociateTokenTemplate,

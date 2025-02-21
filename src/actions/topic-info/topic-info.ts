@@ -24,6 +24,8 @@ export const topicInfoAction = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaTopicInfoContext = composeContext({
             state: state,
             template: topicInfoTemplate,
