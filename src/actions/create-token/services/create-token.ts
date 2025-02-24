@@ -15,11 +15,11 @@ export class CreateTokenService {
             throw new Error("Missing symbol of token");
         }
 
-        if (!params.decimals) {
+        if (typeof params.decimals !== 'number') {
             throw new Error("Missing decimals of token");
         }
 
-        if (!params.initialSupply) {
+        if (typeof params.initialSupply !== 'number') {
             throw new Error("Missing initial supply of token");
         }
 

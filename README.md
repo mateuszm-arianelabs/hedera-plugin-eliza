@@ -327,13 +327,13 @@ Create token action allows to create a new fungible token on the Hedera network.
 Note that this action takes four mandatory parameters:
 - **name** - name of the new token to create
 - **symbol** - token symbol as uppercase short string
-- **decimals** - token decimals as number
-- **initialSupply** - initial supply of fungible tokens given in display format
-- **isSupplyKey** - boolean deciding whether agent's key should be set as supply key allowing to mint more tokens (optional)
-- **isMetadataKey** - boolean deciding whether agent's key should be set as metadata key (optional)
-- **isAdminKey** - boolean deciding whether agent's key should be set as admin key (optional)
-- **memo** - short text
-- **tokenMetadata** - metadata for token
+- **decimals** - token decimals as number, can be 0
+- **initialSupply** - initial supply of fungible tokens given in display format, can be 0
+- **isSupplyKey** - boolean deciding whether agent's key should be set as supply key allowing to mint more tokens (optional), defaults to false
+- **isMetadataKey** - boolean deciding whether agent's key should be set as metadata key (optional), defaults to false
+- **isAdminKey** - boolean deciding whether agent's key should be set as admin key (optional), defaults to false
+- **memo** - short text (optional), defaults to null
+- **tokenMetadata** - metadata for token (optional), defaults to null
 
 #### Example Prompts
 
