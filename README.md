@@ -1203,6 +1203,22 @@ Areas of possible improvements:
 - improving reliability of data extraction (templates for each action data extraction are in `./src/templates`)
 - unit testing the code
 
-### Running Tests
+## Running Tests
 
-Test are not implemented yet
+This project communicates with an **ElizaOS instance** via REST API on the default port **`localhost:3000`**.
+
+- Test cases **send messages to the AI agent**, which triggers relevant actions and returns responses.
+- The responses are **parsed**, and important data is extracted.
+- Based on this extracted data, tests perform **validations** using the **Hedera Mirror Node API** as the source of truth.
+
+#### Important Information
+
+- **Mirror Node delay:** The Hedera Mirror Node has a slight delay, so additional waiting time is required between performing an action and checking the results.
+- **Sequential execution only:**
+    - Tests **cannot** run in parallel because requests and responses from the agent **must be processed in chronological order**.
+    - Concurrent testing is **disabled**, and additional timeouts are introduced before each test to improve reliability.
+
+#### Environment Setup
+
+The `.env` file should contain the **same wallet information** as the running ElizaOS instance.  
+Use the `.env.example` file as a reference.
