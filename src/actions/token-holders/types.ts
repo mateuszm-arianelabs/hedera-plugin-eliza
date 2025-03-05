@@ -13,5 +13,5 @@ export type TokenHoldersResult = {
     tokenName: string;
     tokenSymbol: string;
     tokenDecimals: number;
-    holdersArray: Array<TokenBalance>;
+    holdersArray: Array<Omit<TokenBalance, "balance"> & { balance: string }>;
 };
