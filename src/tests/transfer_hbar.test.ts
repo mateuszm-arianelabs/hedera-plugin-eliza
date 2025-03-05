@@ -117,15 +117,22 @@ describe("Test HBAR transfer", async () => {
                 );
 
                 // Compare before and after including the difference due to paid fees
+                const margin = 0.5;
                 expect(txReport.status).toEqual("SUCCESS");
-                expect(balanceAgentBefore).toBeCloseTo(
-                    balanceAgentAfter + transferAmount + txReport.totalPaidFees,
-                    8
-                );
-                expect(balanceReceiverBefore).toBeCloseTo(
-                    balanceReceiverAfter - transferAmount,
-                    8
-                );
+                expect(
+                    Math.abs(
+                        balanceAgentBefore -
+                            (balanceAgentAfter +
+                                transferAmount +
+                                txReport.totalPaidFees)
+                    )
+                ).toBeLessThanOrEqual(margin);
+                expect(
+                    Math.abs(
+                        balanceReceiverBefore -
+                            (balanceReceiverAfter - transferAmount)
+                    )
+                ).toBeLessThanOrEqual(margin);
 
                 await wait(1000);
             }

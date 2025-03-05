@@ -5,6 +5,7 @@ import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
+import { DetailedTokenBalance } from "./types";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -112,12 +113,40 @@ describe("get_all_balances", () => {
                 const allTokensBalances =
                     await hederaApiClient.getAllTokensBalances(accountId);
 
-                let parsedAllTokensBalances: string = "";
-                for (const balance of allTokensBalances) {
-                    parsedAllTokensBalances += `${balance.tokenName}: ${balance.balanceInDisplayUnit} ${balance.tokenSymbol} (${balance.tokenId})\n`;
-                }
+                const formattedBalances = allTokensBalances.map((token) => ({
+                    ...token,
+                    balanceInDisplayUnit: token.balanceInDisplayUnit.toString(),
+                }));
 
-                expect(response[1].text).toContain(parsedAllTokensBalances);
+                const tokensBalanceFromEliza =
+                    // @ts-expect-error --- amount is not typed properly
+                    response[response.length - 1].content.amount as Array<
+                        Pick<
+                            DetailedTokenBalance,
+                            "balance" | "tokenId" | "tokenName" | "tokenSymbol"
+                        >
+                    >;
+
+                formattedBalances.forEach((token) => {
+                    const correspondingTokenFromEliza =
+                        tokensBalanceFromEliza.find(
+                            ({ tokenId: elizaTokenId }) =>
+                                elizaTokenId === token.tokenId
+                        );
+             
+                    expect(correspondingTokenFromEliza?.tokenId).toEqual(
+                        token.tokenId
+                    );
+                    expect(correspondingTokenFromEliza?.balance).toEqual(
+                        token.balance
+                    );
+                    expect(correspondingTokenFromEliza?.tokenName).toEqual(
+                        token.tokenName
+                    );
+                    expect(correspondingTokenFromEliza?.tokenSymbol).toEqual(
+                        token.tokenSymbol
+                    );
+                });
 
                 await wait(1000);
             }
