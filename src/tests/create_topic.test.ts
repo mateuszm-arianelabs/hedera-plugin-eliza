@@ -43,7 +43,7 @@ describe("create_topic", () => {
             expect(topic.memo).toEqual(MEMO);
         });
 
-        it("should create topic without submit key", async () => {
+        it("should create topic with submit key", async () => {
             const MEMO = "Hello world";
             const prompt: ElizaOSPrompt = {
                 user: "user",
@@ -62,7 +62,29 @@ describe("create_topic", () => {
             const topic = await hederaMirrorNodeClient.getTopic(topicId);
 
             expect(topic.memo).toEqual(MEMO);
-            expect(!!topic.submit_key).toBeFalsy();
+            expect(!!topic.submit_key).toBeTruthy();
+        });
+
+        it("should create topic without submit key", async () => {
+            const MEMO = "Hello world";
+            const prompt: ElizaOSPrompt = {
+                user: "user",
+                text: `Create a topic with memo "${MEMO}". Do not set a submit key`,
+            };
+
+            const response = await elizaOsApiClient.sendPrompt(prompt);
+            await wait(5000);
+
+            const topicId = response[response.length - 1].content?.topicId;
+
+            if (!topicId) {
+                throw new Error("No topic ID found");
+            }
+
+            const topic = await hederaMirrorNodeClient.getTopic(topicId);
+
+            expect(topic.memo).toEqual(MEMO);
+            expect(!!topic.submit_key).toBeTruthy();
         });
     });
 });
