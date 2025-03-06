@@ -12,7 +12,6 @@ import { HederaNetworkType } from "hedera-agent-kit/src/types";
 import { HederaTokenHoldersParams, TokenHoldersResult } from "./types.ts";
 import { hederaTokenHoldersParamsSchema } from "./schema.ts";
 import { TokenHoldersActionService } from "./services/token-holders-action-service.ts";
-import { toDisplayUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
 import { TxStatus } from "../../shared/constants.ts";
 import { tokenHoldersTemplate } from "../../templates";
 
@@ -46,9 +45,7 @@ export const tokenHoldersAction = {
             threshold: hederaTokenHoldersContent.threshold,
         };
 
-        console.log(
-            `Extracted data: ${JSON.stringify(paramOptions, null, 2)}`
-        );
+        console.log(`Extracted data: ${JSON.stringify(paramOptions, null, 2)}`);
 
         try {
             const validationResult =
@@ -75,12 +72,7 @@ export const tokenHoldersAction = {
 
             let text = "";
             for (const holder of result.holdersArray) {
-                const displayBalance = await toDisplayUnit(
-                    result.tokenId,
-                    holder.balance,
-                    networkType
-                ).then((b) => b.toString());
-                text += `${holder.account}: ${displayBalance} ${result.tokenSymbol}\n`;
+                text += `${holder.account}: ${holder.balance} ${result.tokenSymbol}\n`;
             }
 
             if (_callback && result.status === TxStatus.SUCCESS) {
