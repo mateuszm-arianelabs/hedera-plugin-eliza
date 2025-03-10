@@ -118,7 +118,7 @@ describe("get_topic_info", () => {
 
                 const response = await elizaOsApiClient.sendPrompt(prompt);
                 const hashScanLinkMatch = response[response.length - 1].text.match(
-                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+                    /https:\/\/hashscan\.io\/([^/]+)\/topic\/([\d.]+)/
                 );
                 await wait(5000);
 
