@@ -148,7 +148,10 @@ describe("claim_airdrop", () => {
                     text: promptText,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = response[response.length - 1].text.match(
+                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+                );
                 await wait(5000);
 
                 const tokenInfo = await hederaMirrorNodeClient.getAccountToken(
@@ -157,6 +160,7 @@ describe("claim_airdrop", () => {
                 );
 
                 expect(tokenInfo?.balance ?? 0).toBe(expectedClaimedAmount);
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });

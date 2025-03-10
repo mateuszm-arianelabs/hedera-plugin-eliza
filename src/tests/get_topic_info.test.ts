@@ -117,6 +117,9 @@ describe("get_topic_info", () => {
                 };
 
                 const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = response[response.length - 1].text.match(
+                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+                );
                 await wait(5000);
 
                 const topicInfo = response[response.length - 1].text;
@@ -131,6 +134,7 @@ describe("get_topic_info", () => {
                 expect(parsedTopicInfo.admin_key_type).toBe(mirrorNodeTopicInfo.admin_key._type);
                 expect(parsedTopicInfo.creation_time.split('.')[0] + 'Z').toBe(String(topicTimestamp.from).split('.')[0] + 'Z');
                 expect(parsedTopicInfo.expiration_time.split('.')[0] + 'Z').toBe(String(topicTimestamp.to).split('.')[0] + 'Z');
+                expect(hashScanLinkMatch).toBeTruthy();
 
             }
         });

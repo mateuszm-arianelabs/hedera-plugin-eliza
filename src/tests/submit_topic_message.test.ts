@@ -77,7 +77,10 @@ describe("submit_topic_message", () => {
                     text: textPrompt,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = response[response.length - 1].text.match(
+                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+                );
                 await wait(5000);
                 
                 const topicMessages =
@@ -90,6 +93,7 @@ describe("submit_topic_message", () => {
                     }
                 );
                 expect(receivedMessage).toBeTruthy();
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });

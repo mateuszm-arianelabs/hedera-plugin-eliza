@@ -71,13 +71,17 @@ describe("delete_topic", () => {
                     text: textPrompt,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = response[response.length - 1].text.match(
+                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+                );
                 await wait(5000);
 
                 const topicInfo =
                     await hederaMirrorNodeClient.getTopic(topicId);
 
                 expect(topicInfo.deleted).toBe(true);
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });

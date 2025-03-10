@@ -90,12 +90,14 @@ describe("Test HBAR transfer", async () => {
                 const response = await elizaOsApiClient.sendPrompt(prompt);
                 let txHash: string;
 
-                const match = response[response.length - 1].text.match(
+                const hashScanLinkMatch = response[response.length - 1].text.match(
                     /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
                 );
 
-                if (match) {
-                    txHash = `${match[1]}-${match[2].replace(".", "-")}`;
+                expect(hashScanLinkMatch).toBeTruthy();
+
+                if (hashScanLinkMatch) {
+                    txHash = `${hashScanLinkMatch[1]}-${hashScanLinkMatch[2].replace(".", "-")}`;
                     console.log(`Extracted tx hash: ${txHash}`);
                 } else {
                     throw new Error(

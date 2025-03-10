@@ -103,7 +103,10 @@ describe("dissociate_token", () => {
                     text: promptText,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = response[response.length - 1].text.match(
+                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+                );
                 await wait(5000);
 
                 const token = await hederaMirrorNodeClient.getAccountToken(
@@ -112,6 +115,7 @@ describe("dissociate_token", () => {
                 );
 
                 expect(token).toBeUndefined();
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });

@@ -134,7 +134,10 @@ describe("reject_token", async () => {
                     text: promptText,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = response[response.length - 1].text.match(
+                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+                );
 
                 await wait(5000);
 
@@ -144,6 +147,7 @@ describe("reject_token", async () => {
                 );
 
                 expect(tokenInfo?.balance ?? 0).toBe(0);
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });
