@@ -57,7 +57,10 @@ describe("mint_fungible_token", () => {
                 text: `Mint ${AMOUNT_TO_MINT} of token ${token}`,
             };
 
-            await elizaOsApiClient.sendPrompt(prompt);
+            const response = await elizaOsApiClient.sendPrompt(prompt);
+            const hashScanLinkMatch = response[response.length - 1].text.match(
+                /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+            );
             await wait(5000);
 
             const tokenInfo =
@@ -65,6 +68,7 @@ describe("mint_fungible_token", () => {
 
 
             expect(Number(tokenInfo.total_supply)).toBe(INITIAL_SUPPLY + AMOUNT_TO_MINT);
+            expect(hashScanLinkMatch).toBeTruthy();
         });
         it("should not mint fungible token if there is no supply key", async () => {
             const INITIAL_SUPPLY = 5;
@@ -82,7 +86,7 @@ describe("mint_fungible_token", () => {
             };
 
             const response = await elizaOsApiClient.sendPrompt(prompt);
-
+            
             expect(JSON.stringify(response).includes('TOKEN_HAS_NO_SUPPLY_KEY')).toBeTruthy();
         });
     });
