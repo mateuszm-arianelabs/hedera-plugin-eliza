@@ -18,6 +18,7 @@ import {
 } from "../types";
 import BigNumber from "bignumber.js";
 import { fromBaseToDisplayUnit, fromTinybarToHbar } from "./utils";
+import { convertStringToTimestamp } from "../../shared/utils.ts";
 
 export class HederaMirrorNodeClient {
     private baseUrl: string;
@@ -272,8 +273,12 @@ export class HederaMirrorNodeClient {
         }, 0);
     }
 
-    async getTopicMessages(topicId: string): Promise<MirrorNodeTopicMessage[]> {
-        let url: string | null = `${this.baseUrl}/topics/${topicId}/messages`;
+    async getTopicMessages(topicId: string, range?: { lowerTimestamp: string, upperTimestamp: string }): Promise<MirrorNodeTopicMessage[]> {
+
+        const lowerThreshold = range.lowerTimestamp ? `&timestamp=gte:${convertStringToTimestamp(range.lowerTimestamp)}` : '';
+        const upperThreshold = range.upperTimestamp ? `&timestamp=lte:${convertStringToTimestamp(range.upperTimestamp)}` : '';
+
+        let url: string | null = `${this.baseUrl}/topics/${topicId}/messages?encoding=UTF-8&limit=100&order=desc${lowerThreshold}${upperThreshold}`;
         const allMessages: MirrorNodeTopicMessage[] = [];
 
         console.log(`URL: ${url}`);

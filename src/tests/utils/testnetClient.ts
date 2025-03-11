@@ -6,6 +6,7 @@ import {
     Hbar,
     PrivateKey,
     TokenId,
+    TopicId,
 } from "@hashgraph/sdk";
 import { AccountData, hederaPrivateKeyFromString } from "./testnetUtils";
 import {
@@ -17,6 +18,8 @@ import {
     HederaNetworkType,
 } from "hedera-agent-kit";
 import { AirdropRecipient } from "hedera-agent-kit/dist/tools/hts/transactions/airdrop";
+import { SubmitMessageResult } from "hedera-agent-kit/src/types";
+
 export class NetworkClientWrapper {
     private readonly accountId: AccountId;
     private readonly privateKey: PrivateKey;
@@ -116,6 +119,13 @@ export class NetworkClientWrapper {
         submitKey: boolean
     ): Promise<CreateTopicResult> {
         return this.agentKit.createTopic(topicMemo, submitKey);
+    }
+
+    submitTopicMessage(topicId: string, message: string): Promise<SubmitMessageResult> {
+        return this.agentKit.submitTopicMessage(
+            TopicId.fromString(topicId),
+            message
+        );
     }
 
     associateToken(tokenId: string) {
