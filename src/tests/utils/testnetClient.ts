@@ -11,6 +11,7 @@ import { AccountData, hederaPrivateKeyFromString } from "./testnetUtils";
 import {
     AirdropResult,
     CreateFTOptions,
+    CreateNFTOptions,
     CreateTopicResult,
     HederaAgentKit,
     HederaNetworkType,
@@ -70,9 +71,7 @@ export class NetworkClientWrapper {
         };
     }
 
-    async setMaxAutoAssociation(
-        maxAutoAssociation: number
-    ): Promise<void> {
+    async setMaxAutoAssociation(maxAutoAssociation: number): Promise<void> {
         const tx = new AccountUpdateTransaction()
             .setAccountId(this.accountId)
             .setMaxAutomaticTokenAssociations(maxAutoAssociation)
@@ -121,5 +120,10 @@ export class NetworkClientWrapper {
 
     associateToken(tokenId: string) {
         return this.agentKit.associateToken(TokenId.fromString(tokenId));
+    }
+
+    async createNFT(options: CreateNFTOptions): Promise<string> {
+        const result = await this.agentKit.createNFT(options);
+        return result.tokenId.toString();
     }
 }
