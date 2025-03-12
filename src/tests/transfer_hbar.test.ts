@@ -5,6 +5,7 @@ import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -90,9 +91,7 @@ describe("Test HBAR transfer", async () => {
                 const response = await elizaOsApiClient.sendPrompt(prompt);
                 let txHash: string;
 
-                const hashScanLinkMatch = response[response.length - 1].text.match(
-                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-                );
+                const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
 
                 expect(hashScanLinkMatch).toBeTruthy();
 

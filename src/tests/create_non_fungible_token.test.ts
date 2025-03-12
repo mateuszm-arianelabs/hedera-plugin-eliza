@@ -3,6 +3,7 @@ import { ElizaOSApiClient } from "./utils/elizaApiClient";
 import { ElizaOSPrompt } from "./types";
 import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
 import * as dotenv from "dotenv";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -39,9 +40,7 @@ describe("create_non_fungible_token", () => {
         };
 
         const response = await elizaOsApiClient.sendPrompt(prompt);
-        const hashScanLinkMatch = response[response.length - 1].text.match(
-            /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-        );
+        const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
         const tokenId = extractTokenId(response[response.length - 1].text);
 
         await wait(5000);
@@ -75,9 +74,7 @@ describe("create_non_fungible_token", () => {
         };
 
         const response = await elizaOsApiClient.sendPrompt(prompt);
-        const hashScanLinkMatch = response[response.length - 1].text.match(
-            /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-        );
+        const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
         const tokenId = extractTokenId(response[response.length - 1].text);
 
         await wait(5000);
@@ -109,9 +106,7 @@ describe("create_non_fungible_token", () => {
         };
 
         const response = await elizaOsApiClient.sendPrompt(prompt);
-        const hashScanLinkMatch = response[response.length - 1].text.match(
-            /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-        );
+        const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
         const tokenId = extractTokenId(response[response.length - 1].text);
 
         await wait(5000);
@@ -143,9 +138,7 @@ describe("create_non_fungible_token", () => {
         };
 
         const response = await elizaOsApiClient.sendPrompt(prompt);
-        const hashScanLinkMatch = response[response.length - 1].text.match(
-            /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-        );
+        const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
         const tokenId = extractTokenId(response[response.length - 1].text);
 
         await wait(5000);
@@ -177,9 +170,7 @@ describe("create_non_fungible_token", () => {
         };
 
         const response = await elizaOsApiClient.sendPrompt(prompt);
-        const hashScanLinkMatch = response[response.length - 1].text.match(
-            /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-        );
+        const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
         const tokenId = extractTokenId(response[response.length - 1].text);
 
         await wait(5000);
@@ -213,9 +204,7 @@ describe("create_non_fungible_token", () => {
         };
 
         const response = await elizaOsApiClient.sendPrompt(prompt);
-        const hashScanLinkMatch = response[response.length - 1].text.match(
-            /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-        );
+        const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
         const tokenId = extractTokenId(response[response.length - 1].text);
 
         await wait(5000);

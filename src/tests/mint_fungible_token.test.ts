@@ -4,6 +4,7 @@ import { ElizaOSPrompt } from "./types";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -58,9 +59,7 @@ describe("mint_fungible_token", () => {
             };
 
             const response = await elizaOsApiClient.sendPrompt(prompt);
-            const hashScanLinkMatch = response[response.length - 1].text.match(
-                /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-            );
+            const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
             await wait(5000);
 
             const tokenInfo =

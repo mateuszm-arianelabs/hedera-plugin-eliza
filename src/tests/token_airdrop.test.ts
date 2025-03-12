@@ -5,6 +5,7 @@ import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -145,9 +146,7 @@ describe("Test Token Airdrop", async () => {
                 const response = await elizaOsApiClient.sendPrompt(prompt);
                 let txHash: string;
 
-                const hashScanLinkMatch = response[response.length - 1].text.match(
-                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-                );
+                const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
 
                 if (hashScanLinkMatch) {
                     txHash = `${hashScanLinkMatch[1]}-${hashScanLinkMatch[2].replace(".", "-")}`;
