@@ -88,8 +88,7 @@ describe("submit_topic_message", () => {
 
                 const receivedMessage = topicMessages.find(
                     ({ message: _message }) => {
-                        const decodedMessage = Buffer.from(_message, 'base64').toString();
-                        return message === decodedMessage;
+                        return message === _message;
                     }
                 );
                 expect(receivedMessage).toBeTruthy();
