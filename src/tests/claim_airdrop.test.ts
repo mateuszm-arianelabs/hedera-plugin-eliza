@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
 import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -148,7 +149,9 @@ describe("claim_airdrop", () => {
                     text: promptText,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
+
                 await wait(5000);
 
                 const tokenInfo = await hederaMirrorNodeClient.getAccountToken(
@@ -157,6 +160,7 @@ describe("claim_airdrop", () => {
                 );
 
                 expect(tokenInfo?.balance ?? 0).toBe(expectedClaimedAmount);
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });

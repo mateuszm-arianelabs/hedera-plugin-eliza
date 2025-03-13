@@ -4,6 +4,7 @@ import { ElizaOSPrompt, NetworkType } from "./types";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -71,13 +72,15 @@ describe("delete_topic", () => {
                     text: textPrompt,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
                 await wait(5000);
 
                 const topicInfo =
                     await hederaMirrorNodeClient.getTopic(topicId);
 
                 expect(topicInfo.deleted).toBe(true);
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });

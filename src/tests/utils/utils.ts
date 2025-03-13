@@ -15,3 +15,11 @@ export function fromDisplayToBaseUnit(
 ): number {
     return displayBalance * 10 ** decimals;
 }
+
+export function hashscanLinkMatcher(
+    message: string,
+):  RegExpMatchArray {
+    return message.match(
+        /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
+    )
+}

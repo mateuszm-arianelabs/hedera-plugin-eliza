@@ -5,6 +5,7 @@ import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -134,7 +135,8 @@ describe("reject_token", async () => {
                     text: promptText,
                 };
 
-                await elizaOsApiClient.sendPrompt(prompt);
+                const response = await elizaOsApiClient.sendPrompt(prompt);
+                const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
 
                 await wait(5000);
 
@@ -144,6 +146,7 @@ describe("reject_token", async () => {
                 );
 
                 expect(tokenInfo?.balance ?? 0).toBe(0);
+                expect(hashScanLinkMatch).toBeTruthy();
             }
         });
     });

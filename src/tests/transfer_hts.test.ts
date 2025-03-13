@@ -5,6 +5,7 @@ import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
+import { hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -120,12 +121,12 @@ describe("Test Token transfer", async () => {
                 const response = await elizaOsApiClient.sendPrompt(prompt);
                 let txHash: string;
 
-                const match = response[response.length - 1].text.match(
-                    /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
-                );
+                const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
 
-                if (match) {
-                    txHash = `${match[1]}-${match[2].replace(".", "-")}`;
+                expect(hashScanLinkMatch).toBeTruthy();
+
+                if (hashScanLinkMatch) {
+                    txHash = `${hashScanLinkMatch[1]}-${hashScanLinkMatch[2].replace(".", "-")}`;
                     console.log(`Extracted tx hash: ${txHash}`);
                 } else {
                     throw new Error(
