@@ -69,6 +69,37 @@ describe("mint_fungible_token", () => {
             expect(Number(tokenInfo.total_supply)).toBe(INITIAL_SUPPLY + AMOUNT_TO_MINT);
             expect(hashScanLinkMatch).toBeTruthy();
         });
+
+        it("should mint fungible token with 2 decimals", async () => {
+            const INITIAL_SUPPLY_IN_BASE_UNITS = 1000;
+            const AMOUNT_TO_MINT_IN_DISPLAY_UNITS = 10;
+            const DECIMALS = 2;
+
+            const token = await networkClientWrapper.createFT({
+                name: "TokenToMintMore1",
+                symbol: "TTMM1",
+                initialSupply: INITIAL_SUPPLY_IN_BASE_UNITS,
+                decimals: DECIMALS,
+                isSupplyKey: true,
+            });
+
+            const prompt: ElizaOSPrompt = {
+                user: "user",
+                text: `Mint ${AMOUNT_TO_MINT_IN_DISPLAY_UNITS} of token ${token}`,
+            };
+
+            const response = await elizaOsApiClient.sendPrompt(prompt);
+            const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
+            await wait(5000);
+
+            const tokenInfo =
+                await hederaMirrorNodeClient.getTokenDetails(token);
+
+
+            expect(Number(tokenInfo.total_supply)).toBe(INITIAL_SUPPLY_IN_BASE_UNITS  + AMOUNT_TO_MINT_IN_DISPLAY_UNITS * 10 ** DECIMALS);
+            expect(hashScanLinkMatch).toBeTruthy();
+        });
+
         it("should not mint fungible token if there is no supply key", async () => {
             const INITIAL_SUPPLY = 5;
             const AMOUNT_TO_MINT = 10;
