@@ -13,7 +13,7 @@ import { TransferTokenService } from "./services/transfer-token.ts";
 import { transferTokenParamsSchema } from "./schema.ts";
 import { HederaProvider } from "../../providers/client";
 import { generateHashscanUrl } from "../../shared/utils.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 
 export const transferTokenAction: Action = {
     name: "TRANSFER_TOKEN",

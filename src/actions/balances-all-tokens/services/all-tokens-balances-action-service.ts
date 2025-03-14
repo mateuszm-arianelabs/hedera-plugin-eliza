@@ -1,5 +1,4 @@
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
 import {
     AllTokensBalancesResult,
     HederaAllTokensBalancesParams,
@@ -7,7 +6,7 @@ import {
 import {
     DetailedTokenBalance,
     HederaNetworkType,
-} from "hedera-agent-kit/src/types";
+} from "hedera-agent-kit";
 import { TxStatus } from "../../../shared/constants.ts";
 
 export class AllTokensBalancesActionService {
@@ -21,8 +20,7 @@ export class AllTokensBalancesActionService {
             throw new Error("No receiver address");
         }
 
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
         const balancesArray: Array<DetailedTokenBalance> =
             await agentKit.getAllTokensBalances(networkType, params.address as string);
 

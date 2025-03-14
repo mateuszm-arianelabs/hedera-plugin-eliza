@@ -1,7 +1,7 @@
 import { HederaProvider } from "../../../providers/client";
 import { AccountId, PendingAirdropId, TokenId } from "@hashgraph/sdk";
 import { ClaimAirdropData } from "../types.ts";
-import { ClaimAirdropResult } from "hedera-agent-kit/src/types";
+import { ClaimAirdropResult } from "hedera-agent-kit";
 
 export class ClaimAirdropService {
     constructor(private hederaProvider: HederaProvider) {}

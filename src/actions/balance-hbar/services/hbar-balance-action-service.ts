@@ -3,7 +3,6 @@ import type {
     IHbarBalanceResponse,
 } from "../types.ts";
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
 import { TxStatus } from "../../../shared/constants.ts";
 
 export class HbarBalanceActionService {
@@ -22,8 +21,7 @@ export class HbarBalanceActionService {
             throw new Error("No symbol");
         }
 
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
         const balance = await agentKit.getHbarBalance(params.address);
 
         return {

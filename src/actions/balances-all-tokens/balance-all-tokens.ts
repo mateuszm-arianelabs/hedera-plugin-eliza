@@ -14,7 +14,7 @@ import {
 import { hederaAllTokensBalancesParamsSchema } from "./schema.ts";
 import { HederaProvider } from "../../providers/client";
 import { AllTokensBalancesActionService } from "./services/all-tokens-balances-action-service.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
 import { balancesAllTokensTemplate } from "../../templates";
 

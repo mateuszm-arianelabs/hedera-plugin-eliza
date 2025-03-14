@@ -12,7 +12,7 @@ import { HederaTopicInfoParams } from "./types.ts";
 import { TopicInfoActionService } from "./services/topic-info-action-service.ts";
 import { hederaTopicInfoParamsSchema } from "./schema.ts";
 import { topicInfoTemplate } from "../../templates";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 
 export const topicInfoAction = {
     name: "HEDERA_TOPIC_INFO",

@@ -4,7 +4,7 @@ import { ElizaOSPrompt, NetworkType } from "./types";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
-import { hashscanLinkMatcher } from "./utils/utils.ts";
+import { hashscanTopicLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -84,6 +84,8 @@ describe("get_topic_info", () => {
                 topic3 = _topic3.topicId;
             });
 
+            await wait(5000);
+
             testCases = [
                 {
                     textPrompt: `Give me the info for topic ${topic1}`,
@@ -118,7 +120,7 @@ describe("get_topic_info", () => {
                 };
 
                 const response = await elizaOsApiClient.sendPrompt(prompt);
-                const hashScanLinkMatch = hashscanLinkMatcher(response[response.length - 1].text);
+                const hashScanLinkMatch = hashscanTopicLinkMatcher(response[response.length - 1].text);
                 await wait(5000);
 
                 const topicInfo = response[response.length - 1].text;

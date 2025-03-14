@@ -13,7 +13,7 @@ import { HederaProvider } from "../../providers/client";
 import { airdropTokenParamsSchema } from "./schema.ts";
 import { AirdropTokenService } from "./services/airdrop-token.ts";
 import { generateHashscanUrl } from "../../shared/utils.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
 
 export const airdropTokenAction: Action = {

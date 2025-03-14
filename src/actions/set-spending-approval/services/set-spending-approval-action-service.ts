@@ -1,11 +1,11 @@
 import { HederaProvider } from "../../../providers/client";
-import { AssetAllowanceResult, HederaAgentKit } from "hedera-agent-kit";
+import { AssetAllowanceResult } from "hedera-agent-kit";
 import {
     HederaSetSpendingApprovalParams,
 } from "../types.ts";
 import { AccountId, TokenId } from "@hashgraph/sdk";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
-import { toBaseUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
+import { HederaNetworkType } from "hedera-agent-kit";
+import { toBaseUnit } from "hedera-agent-kit";
 
 export class SetSpendingApprovalTokenAction {
     constructor(private hederaProvider: HederaProvider) {}
@@ -14,8 +14,7 @@ export class SetSpendingApprovalTokenAction {
         params: HederaSetSpendingApprovalParams,
         networkType: HederaNetworkType,
     ): Promise<AssetAllowanceResult> {
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
 
         let parsedAmount = params.amount;
         if (params.tokenId) {

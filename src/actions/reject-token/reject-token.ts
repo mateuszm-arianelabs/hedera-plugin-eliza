@@ -12,7 +12,7 @@ import { HederaHtsBalanceParams } from "./types.ts";
 import { hederaRejectTokenParamsSchema } from "./schema.ts";
 import { RejectTokenActionService } from "./service/reject-token-action-service.ts";
 import { generateHashscanUrl } from "../../shared/utils.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
 import { rejectTokenTemplate } from "../../templates";
 

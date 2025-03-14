@@ -1,12 +1,11 @@
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
 import { HederaTokenHoldersParams, TokenHoldersResult } from "../types.ts";
 import {
     HederaNetworkType,
     HtsTokenDetails,
     TokenBalance,
-} from "hedera-agent-kit/src/types";
-import { toBaseUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
+} from "hedera-agent-kit";
+import { toBaseUnit } from "hedera-agent-kit";
 import { TxStatus } from "../../../shared/constants.ts";
 import { toBaseUnitSync } from "../../../shared/utils.ts";
 
@@ -21,8 +20,7 @@ export class TokenHoldersActionService {
             throw new Error("No token id provided!");
         }
 
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
 
         const thresholdBaseUnit = params.threshold
             ? await toBaseUnit(

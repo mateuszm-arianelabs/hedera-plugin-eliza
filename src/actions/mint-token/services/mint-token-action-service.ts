@@ -1,10 +1,9 @@
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
-import { MintTokenResult } from "hedera-agent-kit/src/types";
+import { MintTokenResult } from "hedera-agent-kit";
 import { HederaMintTokenParams } from "../types.ts";
 import { TokenId } from "@hashgraph/sdk";
-import { toBaseUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { toBaseUnit } from "hedera-agent-kit";
+import { HederaNetworkType } from "hedera-agent-kit";
 
 export class MintTokenActionService {
     constructor(private hederaProvider: HederaProvider) {
@@ -15,8 +14,7 @@ export class MintTokenActionService {
         params: HederaMintTokenParams,
         networkType: HederaNetworkType
     ): Promise<MintTokenResult> {
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
 
         const baseUnitAmount = await toBaseUnit(
             params.tokenId,

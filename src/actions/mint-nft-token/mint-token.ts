@@ -10,9 +10,9 @@ import {
 import { HederaProvider } from "../../providers/client";
 import { MintNftActionService } from "./services/mint-nft-action-service.ts";
 import { HederaMintNFTTokenParams } from "./types.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
-import { MintTokenResult } from "hedera-agent-kit/src/types";
+import { MintTokenResult } from "hedera-agent-kit";
 import { generateHashscanUrl } from "../../shared/utils.ts";
 import { hederaMintNFTTokenParamsSchema } from "./schema.ts";
 import { mintNFTTokenTemplate, mintTokenTemplate } from "../../templates";

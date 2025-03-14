@@ -1,8 +1,7 @@
 import type { HederaHtsBalanceParams } from "../types.ts";
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
 import { TokenId } from "@hashgraph/sdk";
-import { RejectTokenResult } from "hedera-agent-kit/src/types";
+import { RejectTokenResult } from "hedera-agent-kit";
 
 export class RejectTokenActionService {
     constructor(private hederaProvider: HederaProvider) {
@@ -10,8 +9,7 @@ export class RejectTokenActionService {
     }
 
     async execute(params: HederaHtsBalanceParams): Promise<RejectTokenResult> {
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
 
         return await agentKit.rejectToken(TokenId.fromString(params.tokenId));
     }

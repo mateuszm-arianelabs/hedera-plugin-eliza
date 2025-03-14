@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TokenBalance } from "hedera-agent-kit/dist/types";
+import { TokenBalance } from "hedera-agent-kit";
 import { hederaTokenHoldersParamsSchema } from "./schema.ts";
 import { TxStatus } from "../../shared/constants.ts";
 

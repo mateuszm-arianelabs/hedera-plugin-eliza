@@ -1,4 +1,4 @@
-import { CreateTopicResult } from "hedera-agent-kit/src/types";
+import { CreateTopicResult } from "hedera-agent-kit";
 import { HederaProvider } from "../../../providers/client";
 import { CreateTopicParams } from "../types.ts";
 

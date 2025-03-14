@@ -9,12 +9,12 @@ import {
     State,
 } from "@elizaos/core";
 import { HederaProvider } from "../../providers/client";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { pendingAirdropTemplate } from "../../templates";
 import { pendingAirdropsParams } from "./schema.ts";
 import { GetPendingAirdropsService } from "./services/get-pending-airdrops.ts";
-import { toDisplayUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
-import { get_hts_token_details } from "hedera-agent-kit/dist/tools/hts/queries";
+import { toDisplayUnit } from "hedera-agent-kit";
+import { get_hts_token_details } from "hedera-agent-kit";
 
 export const pendingAirdropsAction: Action = {
     name: "HEDERA_PENDING_AIRDROPS",

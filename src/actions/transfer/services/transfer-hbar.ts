@@ -1,6 +1,6 @@
 import { HederaProvider } from "../../../providers/client";
 import { HederaTransferParams } from "../types.ts";
-import { TransferHBARResult } from "hedera-agent-kit/src/types";
+import { TransferHBARResult } from "hedera-agent-kit";
 
 export class TransferHbarService {
     constructor(private hederaProvider: HederaProvider) {}
