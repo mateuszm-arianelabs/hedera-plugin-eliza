@@ -41,9 +41,10 @@ describe("claim_airdrop", () => {
                 process.env.HEDERA_KEY_TYPE!,
                 "testnet"
             );
-
+            const AIRDROP_CREATOR_HBAR_BALANCE = 20;
+            
             airdropCreatorAccount = await networkClientWrapper.createAccount(
-                15,
+                AIRDROP_CREATOR_HBAR_BALANCE,
                 0
             );
 

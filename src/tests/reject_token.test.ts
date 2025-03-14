@@ -61,8 +61,9 @@ describe("reject_token", async () => {
                 );
             }
 
+            const AIRDROP_CREATOR_HBAR_BALANCE = 20;
             // Create test accounts
-            acc1 = await networkClientWrapper.createAccount(10, -1);
+            acc1 = await networkClientWrapper.createAccount(AIRDROP_CREATOR_HBAR_BALANCE, -1);
 
             airdropCreatorNetworkClientWrapper = new NetworkClientWrapper(
                 acc1.accountId,
