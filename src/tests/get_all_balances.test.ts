@@ -66,6 +66,8 @@ describe("get_all_balances", () => {
             );
             await networkClientWrapper.transferToken(acc3.accountId, token1, 7);
 
+            await wait(5000)
+
             // Initialize API clients
             elizaOsApiClient = new ElizaOSApiClient(
                 `http://${process.env.ELIZAOS_REST_HOSTNAME}:${process.env.ELIZAOS_REST_PORT}`
@@ -147,8 +149,6 @@ describe("get_all_balances", () => {
                         token.tokenSymbol
                     );
                 });
-
-                await wait(1000);
             }
         });
     });

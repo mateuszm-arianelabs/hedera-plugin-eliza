@@ -24,8 +24,12 @@ export class GetTopicMessageActionService {
         const result = await agentKit.getTopicMessages(
             TopicId.fromString(params.topicId),
             networkType,
-            params.lowerThreshold != null ? convertStringToTimestamp(params.lowerThreshold) : undefined,
-            params.upperThreshold != null ? convertStringToTimestamp(params.upperThreshold) : undefined
+            params.lowerThreshold != "null"
+                ? convertStringToTimestamp(params.lowerThreshold)
+                : undefined,
+            params.upperThreshold != "null"
+                ? convertStringToTimestamp(params.upperThreshold)
+                : undefined
         );
 
         return {
