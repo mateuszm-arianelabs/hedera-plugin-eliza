@@ -25,6 +25,8 @@ export const balanceHtsAction = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaHtsBalanceContext = composeContext({
             state: state,
             template: balanceHtsTemplate,

@@ -8,6 +8,7 @@ import {
 } from "hedera-agent-kit/src/types";
 import { toBaseUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
 import { TxStatus } from "../../../shared/constants.ts";
+import { toBaseUnitSync } from "../../../shared/utils.ts";
 
 export class TokenHoldersActionService {
     constructor(private hederaProvider: HederaProvider) {}
@@ -38,6 +39,14 @@ export class TokenHoldersActionService {
                 thresholdBaseUnit
             );
 
+        const formattedBalances = balancesArray.map(
+            ({ account, balance, decimals }) => ({
+                account,
+                balance: toBaseUnitSync(decimals, balance).toString(),
+                decimals,
+            })
+        );
+
         const tokenDetails: HtsTokenDetails = await agentKit.getHtsTokenDetails(
             params.tokenId,
             networkType
@@ -49,7 +58,7 @@ export class TokenHoldersActionService {
             tokenName: tokenDetails.name,
             tokenSymbol: tokenDetails.symbol,
             tokenDecimals: Number(tokenDetails.decimals),
-            holdersArray: balancesArray,
+            holdersArray: formattedBalances,
         } as TokenHoldersResult;
     }
 }

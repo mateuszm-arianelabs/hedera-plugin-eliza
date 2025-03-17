@@ -15,11 +15,11 @@ export class CreateTokenService {
             throw new Error("Missing symbol of token");
         }
 
-        if (!params.decimals) {
+        if (typeof params.decimals !== 'number') {
             throw new Error("Missing decimals of token");
         }
 
-        if (!params.initialSupply) {
+        if (typeof params.initialSupply !== 'number') {
             throw new Error("Missing initial supply of token");
         }
 
@@ -41,8 +41,8 @@ export class CreateTokenService {
             isSupplyKey: params.isSupplyKey,
             isMetadataKey: params.isMetadataKey,
             isAdminKey: params.isAdminKey,
-            tokenMetadata: new TextEncoder().encode(params.tokenMetadata),
-            memo: params.memo,
+            tokenMetadata: new TextEncoder().encode(params.tokenMetadata as string),
+            memo: params.memo as string,
         };
 
         return agentKit.createFT(options);

@@ -27,6 +27,8 @@ export const associateTokenAction = {
         _options: { [key: string]: unknown },
         _callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaAssociateTokenContext = composeContext({
             state: state,
             template: associateTokenTemplate,

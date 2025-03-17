@@ -27,6 +27,8 @@ export const setSpendingApprovalAction = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback,
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaGetTopicMessagesContext = composeContext({
             state: state,
             template: getSpendingAllowanceTemplate,

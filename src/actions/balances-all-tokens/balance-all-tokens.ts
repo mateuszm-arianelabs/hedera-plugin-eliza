@@ -29,6 +29,8 @@ export const balancesAllTokensAction = {
         _options: { [key: string]: unknown },
         _callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaAllTokensBalancesContext = composeContext({
             state: state,
             template: balancesAllTokensTemplate,
@@ -60,7 +62,7 @@ export const balancesAllTokensAction = {
             }
 
             // fallback as LLM model sometimes fails to extract connected wallet account id from agent's state
-            if (!paramOptions.address) {
+            if (!paramOptions.address || paramOptions.address === 'null') {
                 console.warn(
                     `LLM couldn't extract agent's wallet from state. Manually assigning connected wallet address.`
                 );

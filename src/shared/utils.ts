@@ -1,3 +1,4 @@
+import BigNumber from "bignumber.js";
 import { HederaNetworkType } from "./types.ts";
 import { z } from "zod";
 
@@ -40,3 +41,13 @@ export const castToBoolean = z.preprocess((val) => {
 // Sometimes null values are returned as strings and require parsing
 export const castToNull = (value: any) => (value === "null" ? null : value);
 
+export const castToEmptyString = (value: any) => (value === "null" ? "" : value);
+
+export const toBaseUnitSync = (decimalsString: string | number, value: string | number) => {
+    const decimals = new BigNumber(decimalsString);
+    const divisor = new BigNumber(10).pow(decimals);
+
+    const bigValue = BigNumber.isBigNumber(value) ? value : new BigNumber(value);
+
+    return bigValue.dividedBy(divisor);
+}

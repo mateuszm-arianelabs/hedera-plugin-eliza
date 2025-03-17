@@ -327,13 +327,13 @@ Create token action allows to create a new fungible token on the Hedera network.
 Note that this action takes four mandatory parameters:
 - **name** - name of the new token to create
 - **symbol** - token symbol as uppercase short string
-- **decimals** - token decimals as number
-- **initialSupply** - initial supply of fungible tokens given in display format
-- **isSupplyKey** - boolean deciding whether agent's key should be set as supply key allowing to mint more tokens (optional)
-- **isMetadataKey** - boolean deciding whether agent's key should be set as metadata key (optional)
-- **isAdminKey** - boolean deciding whether agent's key should be set as admin key (optional)
-- **memo** - short text
-- **tokenMetadata** - metadata for token
+- **decimals** - token decimals as number, can be 0
+- **initialSupply** - initial supply of fungible tokens given in display format, can be 0
+- **isSupplyKey** - boolean deciding whether agent's key should be set as supply key allowing to mint more tokens (optional), defaults to false
+- **isMetadataKey** - boolean deciding whether agent's key should be set as metadata key (optional), defaults to false
+- **isAdminKey** - boolean deciding whether agent's key should be set as admin key (optional), defaults to false
+- **memo** - short text (optional), defaults to null
+- **tokenMetadata** - metadata for token (optional), defaults to null
 
 #### Example Prompts
 
@@ -1203,6 +1203,22 @@ Areas of possible improvements:
 - improving reliability of data extraction (templates for each action data extraction are in `./src/templates`)
 - unit testing the code
 
-### Running Tests
+## Running Tests
 
-Test are not implemented yet
+This project communicates with an **ElizaOS instance** via REST API on the default port **`localhost:3000`**.
+
+- Test cases **send messages to the AI agent**, which triggers relevant actions and returns responses.
+- The responses are **parsed**, and important data is extracted.
+- Based on this extracted data, tests perform **validations** using the **Hedera Mirror Node API** as the source of truth.
+
+#### Important Information
+
+- **Mirror Node delay:** The Hedera Mirror Node has a slight delay, so additional waiting time is required between performing an action and checking the results.
+- **Sequential execution only:**
+    - Tests **cannot** run in parallel because requests and responses from the agent **must be processed in chronological order**.
+    - Concurrent testing is **disabled**, and additional timeouts are introduced before each test to improve reliability.
+
+#### Environment Setup
+
+The `.env` file should contain the **same wallet information** as the running ElizaOS instance.  
+Use the `.env.example` file as a reference.

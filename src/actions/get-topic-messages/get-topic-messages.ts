@@ -27,6 +27,8 @@ export const getTopicMessagesAction = {
         _options: { [key: string]: unknown },
         callback?: HandlerCallback
     ) => {
+        state.lastMessage = state.recentMessagesData[1].content.text;
+
         const hederaGetTopicMessagesContext = composeContext({
             state: state,
             template: getTopicMessagesTemplate,
@@ -45,9 +47,7 @@ export const getTopicMessagesAction = {
             upperThreshold: hederaGetTopicMessagesContent.upperThreshold,
         };
 
-        console.log(
-            `Extracted data: ${JSON.stringify(paramOptions, null, 2)}`
-        );
+        console.log(`Extracted data: ${JSON.stringify(paramOptions, null, 2)}`);
 
         try {
             const validationResult =
@@ -70,16 +70,23 @@ export const getTopicMessagesAction = {
 
             const action = new GetTopicMessageActionService(hederaProvider);
 
-            const response = await action.execute(paramOptions, networkType);
+            const response = await action.execute(
+                validationResult.data,
+                networkType
+            );
 
             if (callback && response.status === TxStatus.SUCCESS) {
                 let formatedText = "";
 
-                response.messages.forEach((hcsMessage) => {
-                    formatedText += `-----------------------\nAuthor: ${hcsMessage.payer_account_id}\nBody: ${hcsMessage.message}\nTimestamp: ${convertTimestampToUTC(hcsMessage.consensus_timestamp)}\n`;
-                });
+                if (response.messages.length == 0) {
+                    formatedText = "No messages found.";
+                } else {
+                    response.messages.forEach((hcsMessage) => {
+                        formatedText += `-----------------------\nAuthor: ${hcsMessage.payer_account_id}\nBody: ${hcsMessage.message}\nTimestamp: ${convertTimestampToUTC(hcsMessage.consensus_timestamp)}\n`;
+                    });
+                }
 
-                const dateRangeText = `between ${paramOptions.lowerThreshold ? paramOptions.lowerThreshold : "topic creation"} and ${paramOptions.upperThreshold ? paramOptions.upperThreshold : "this moment"}`;
+                const dateRangeText = `between ${validationResult.data.lowerThreshold ? validationResult.data.lowerThreshold : "topic creation"} and ${validationResult.data.upperThreshold ? validationResult.data.upperThreshold : "this moment"}`;
 
                 await callback({
                     text: `Messages for topic ${paramOptions.topicId} posted ${dateRangeText}:\n${formatedText}`,

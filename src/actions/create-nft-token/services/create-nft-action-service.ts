@@ -22,9 +22,9 @@ export class CreateNftActionService  {
             symbol: params.symbol,
             maxSupply: params.maxSupply, // NFT tokens always have decimals 0 so no parsing to base unit is needed
             isMetadataKey: params.isMetadataKey,
-            isAdminKey: params.isMetadataKey,
-            tokenMetadata: new TextEncoder().encode(params.tokenMetadata),
-            memo: params.memo
+            isAdminKey: params.isAdminKey,
+            tokenMetadata: new TextEncoder().encode(params.tokenMetadata as string),
+            memo: params.memo as string,
         }
 
         return agentKit.createNFT(
