@@ -23,3 +23,11 @@ export function hashscanLinkMatcher(
         /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
     )
 }
+
+export function hashscanTopicLinkMatcher(
+    message: string,
+):  RegExpMatchArray {
+    return message.match(
+        /https:\/\/hashscan\.io\/[^/]+\/topic\/([\d.]+)/
+    )
+}
