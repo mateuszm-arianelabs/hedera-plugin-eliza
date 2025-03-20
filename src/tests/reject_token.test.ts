@@ -5,7 +5,7 @@ import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
 import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
-import { hashscanLinkMatcher } from "./utils/utils.ts";
+import { getHbarWithMultiplierFactor, hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -61,7 +61,7 @@ describe("reject_token", async () => {
                 );
             }
 
-            const AIRDROP_CREATOR_HBAR_BALANCE = 20;
+            const AIRDROP_CREATOR_HBAR_BALANCE = getHbarWithMultiplierFactor(20);
             // Create test accounts
             acc1 = await networkClientWrapper.createAccount(AIRDROP_CREATOR_HBAR_BALANCE, -1);
 

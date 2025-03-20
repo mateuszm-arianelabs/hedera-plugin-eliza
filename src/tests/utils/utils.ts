@@ -23,3 +23,8 @@ export function hashscanLinkMatcher(
         /https:\/\/hashscan\.io\/[^/]+\/tx\/([\d.]+)@([\d.]+)/
     )
 }
+
+export const getHbarWithMultiplierFactor = (hbarAmount: number) => {
+    const multiplierFactor = Number(process.env.HBAR_MULTIPLIER_FACTOR) || 1;
+    return hbarAmount * multiplierFactor;
+};

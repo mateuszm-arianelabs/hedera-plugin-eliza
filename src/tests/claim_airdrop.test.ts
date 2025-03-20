@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 import { NetworkClientWrapper } from "./utils/testnetClient";
 import { AccountData } from "./utils/testnetUtils";
 import { HederaMirrorNodeClient } from "./utils/hederaMirrorNodeClient";
-import { hashscanLinkMatcher } from "./utils/utils.ts";
+import { getHbarWithMultiplierFactor, hashscanLinkMatcher } from "./utils/utils.ts";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -41,7 +41,7 @@ describe("claim_airdrop", () => {
                 process.env.HEDERA_KEY_TYPE!,
                 "testnet"
             );
-            const AIRDROP_CREATOR_HBAR_BALANCE = 20;
+            const AIRDROP_CREATOR_HBAR_BALANCE = getHbarWithMultiplierFactor(20);
             
             airdropCreatorAccount = await networkClientWrapper.createAccount(
                 AIRDROP_CREATOR_HBAR_BALANCE,
