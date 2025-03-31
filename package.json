@@ -28,5 +28,28 @@
         "prettier": "^3.5.0",
         "typescript": "^5.7.3",
         "vitest": "^3.0.7"
+    },
+    {
+      "agentConfig": {
+        "pluginType": "elizaos:plugin:0.1.9",
+        "pluginParameters": {
+          "HEDERA_PRIVATE_KEY": {
+            "type": "string",
+            "description": "Accepts ED25519 and ECDSA private keys both DER and HEX encoded"
+          },
+          "HEDERA_ACCOUNT_ID": {
+            "type": "string",
+            "description": "Example: 0.0.5392887"
+          },
+          "HEDERA_NETWORK_TYPE": {
+            "type": "string",
+            "description": "Accepts 'mainnet', 'testnet' or 'previewnet'"
+          },
+          "HEDERA_KEY_TYPE": {
+            "type": "string",
+            "description": "Accepts 'ECDSA' or 'ED25519'"
+          },
+        }
     }
+}
 }
