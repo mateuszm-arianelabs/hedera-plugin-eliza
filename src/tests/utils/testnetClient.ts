@@ -17,9 +17,7 @@ import {
     HederaAgentKit,
     HederaNetworkType,
 } from "hedera-agent-kit";
-import { AirdropRecipient } from "hedera-agent-kit/dist/tools/hts/transactions/airdrop";
-import { SubmitMessageResult } from "hedera-agent-kit/src/types";
-
+import { AirdropRecipient, SubmitMessageResult } from "hedera-agent-kit";
 export class NetworkClientWrapper {
     private readonly accountId: AccountId;
     private readonly privateKey: PrivateKey;

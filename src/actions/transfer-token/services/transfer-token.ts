@@ -4,8 +4,8 @@ import { TokenId } from "@hashgraph/sdk";
 import {
     TransferTokenResult,
     HederaNetworkType,
-} from "hedera-agent-kit/src/types";
-import { toBaseUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
+} from "hedera-agent-kit";
+import { toBaseUnit } from "hedera-agent-kit";
 
 export class TransferTokenService {
     constructor(private hederaProvider: HederaProvider) {}

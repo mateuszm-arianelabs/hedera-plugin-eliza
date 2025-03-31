@@ -13,7 +13,7 @@ import { claimAirdropTemplate } from "../../templates";
 import { claimAirdropParamsSchema } from "./schema.ts";
 import { ClaimAirdropService } from "./services/claim-airdrop-service.ts";
 import { generateHashscanUrl } from "../../shared/utils.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
 
 export const claimAirdropAction: Action = {

@@ -1,6 +1,5 @@
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
-import { SubmitMessageResult } from "hedera-agent-kit/src/types";
+import { SubmitMessageResult } from "hedera-agent-kit";
 import { HederaSubmitTopicMessageParams } from "../types.ts";
 import { TopicId } from "@hashgraph/sdk";
 
@@ -12,8 +11,7 @@ export class SubmitTopicMessageActionService {
     async execute(
         params: HederaSubmitTopicMessageParams
     ): Promise<SubmitMessageResult> {
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
 
         return agentKit.submitTopicMessage(
             TopicId.fromString(params.topicId),

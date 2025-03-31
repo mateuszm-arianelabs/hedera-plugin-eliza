@@ -8,7 +8,7 @@ import {
     State,
 } from "@elizaos/core";
 import { HederaProvider } from "../../providers/client";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { HederaTokenHoldersParams, TokenHoldersResult } from "./types.ts";
 import { hederaTokenHoldersParamsSchema } from "./schema.ts";
 import { TokenHoldersActionService } from "./services/token-holders-action-service.ts";

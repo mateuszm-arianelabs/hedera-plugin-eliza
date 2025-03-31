@@ -1,5 +1,5 @@
 import { HederaProvider } from "../../../providers/client";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 
 export class GetPendingAirdropsService {
     constructor(private hederaProvider: HederaProvider) {}

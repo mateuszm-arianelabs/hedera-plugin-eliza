@@ -1,11 +1,10 @@
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
 import {
     GetTopicMessagesResult,
     HederaGetTopicMessagesParams,
 } from "../types.ts";
 import { TopicId } from "@hashgraph/sdk";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { convertStringToTimestamp } from "../../../shared/utils.ts";
 import { TxStatus } from "../../../shared/constants.ts";
 
@@ -18,8 +17,7 @@ export class GetTopicMessageActionService {
         params: HederaGetTopicMessagesParams,
         networkType: HederaNetworkType
     ): Promise<GetTopicMessagesResult> {
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
 
         const result = await agentKit.getTopicMessages(
             TopicId.fromString(params.topicId),

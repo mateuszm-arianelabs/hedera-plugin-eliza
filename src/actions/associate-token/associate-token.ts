@@ -13,7 +13,7 @@ import { HederaAssociateTokenParams } from "./types.ts";
 import { hederaAssociateTokenParamsSchema } from "./schema.ts";
 import { AssociateTokenActionService } from "./service/associate-token-action-service.ts";
 import { TxStatus } from "../../shared/constants.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { generateHashscanUrl } from "../../shared/utils.ts";
 import { associateTokenTemplate } from "../../templates";
 

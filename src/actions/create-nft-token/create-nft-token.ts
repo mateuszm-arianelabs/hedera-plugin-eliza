@@ -13,7 +13,7 @@ import { HederaProvider } from "../../providers/client";
 import { CreateNftActionService } from "./services/create-nft-action-service.ts";
 import { createNFTTokenParamsSchema } from "./schema.ts";
 import { generateHashscanUrl } from "../../shared/utils.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
 import { createNFTDetailsDescription } from "./utils.ts";
 

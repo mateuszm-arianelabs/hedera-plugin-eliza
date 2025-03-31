@@ -9,7 +9,7 @@ import {
 } from "@elizaos/core";
 import { HederaProvider } from "../../providers/client";
 import { HederaSetSpendingApprovalParams } from "./types.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
 import { generateHashscanUrl } from "../../shared/utils.ts";
 import { hederaSetSpendingApprovalParamsSchema } from "./schema.ts";

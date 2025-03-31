@@ -1,6 +1,6 @@
 import { CreateNFTTokenParams } from "../types.ts";
 import { HederaProvider } from "../../../providers/client";
-import { CreateTokenResult } from "hedera-agent-kit/src/types";
+import { CreateTokenResult } from "hedera-agent-kit";
 import { CreateNFTOptions } from "hedera-agent-kit";
 
 export class CreateNftActionService  {
