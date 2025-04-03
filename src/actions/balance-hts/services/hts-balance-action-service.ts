@@ -1,8 +1,7 @@
 import type { HederaHtsBalanceParams, IHtsBalanceResponse } from "../types.ts";
 import { HederaProvider } from "../../../providers/client";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
-import { HederaAgentKit } from "hedera-agent-kit";
-import { toDisplayUnit } from "hedera-agent-kit/dist/utils/hts-format-utils";
+import { HederaNetworkType } from "hedera-agent-kit";
+import { toDisplayUnit } from "hedera-agent-kit";
 import { TxStatus } from "../../../shared/constants.ts";
 
 export class HtsBalanceActionService {
@@ -14,8 +13,7 @@ export class HtsBalanceActionService {
         params: HederaHtsBalanceParams,
         networkType: HederaNetworkType
     ): Promise<IHtsBalanceResponse> {
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
         const balance = await agentKit.getHtsBalance(
             params.tokenId,
             networkType,

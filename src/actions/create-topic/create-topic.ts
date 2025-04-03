@@ -14,7 +14,7 @@ import { HederaProvider } from "../../providers/client";
 import { CreateTopicService } from "./services/create-topic.ts";
 import { TxStatus } from "../../shared/constants.ts";
 import { generateHashscanUrl } from "../../shared/utils.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 
 export const createTopicAction: Action = {
     name: "HEDERA_CREATE_TOPIC",

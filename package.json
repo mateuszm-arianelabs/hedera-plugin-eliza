@@ -9,7 +9,7 @@
         "@hashgraph/sdk": "^2.56.0",
         "bignumber.js": "^9.1.2",
         "dotenv": "^16.4.7",
-        "hedera-agent-kit": "^1.0.5",
+        "hedera-agent-kit": "1.0.6",
         "tsup": "8.3.5",
         "zod": "^3.24.2"
     },

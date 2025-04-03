@@ -1,7 +1,7 @@
 import { HederaProvider } from "../../../providers/client";
 import { DeleteTopicParams } from "../types.ts";
 import { TopicId } from "@hashgraph/sdk";
-import { DeleteTopicResult } from "hedera-agent-kit/dist/types";
+import { DeleteTopicResult } from "hedera-agent-kit";
 
 export class DeleteTopicService {
     constructor(private hederaProvider: HederaProvider) {}

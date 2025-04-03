@@ -42,6 +42,8 @@ describe("get_topic_messages", () => {
 
             const timestampBefore: string = new Date().toISOString();
 
+            await wait(1000);
+            
             await Promise.all([
                 networkClientWrapper.submitTopicMessage(topic1, "(1) Test message for topic 1."),
             ]);

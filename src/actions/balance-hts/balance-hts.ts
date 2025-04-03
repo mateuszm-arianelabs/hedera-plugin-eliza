@@ -11,7 +11,7 @@ import { hederaHtsBalanceParamsSchema } from "./schema.ts";
 import { HederaProvider } from "../../providers/client";
 import { HtsBalanceActionService } from "./services/hts-balance-action-service.ts";
 import { HederaHtsBalanceParams, IHtsBalanceResponse } from "./types.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { TxStatus } from "../../shared/constants.ts";
 import { balanceHtsTemplate } from "../../templates";
 

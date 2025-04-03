@@ -13,7 +13,7 @@ import { DissociateTokenActionService } from "./service/dissociate-token-action-
 import { TxStatus } from "../../shared/constants.ts";
 import { hederaDissociateTokenParamsSchema } from "./schema.ts";
 import { HederaDissociateTokenParams } from "./types.ts";
-import { HederaNetworkType } from "hedera-agent-kit/src/types";
+import { HederaNetworkType } from "hedera-agent-kit";
 import { generateHashscanUrl } from "../../shared/utils.ts";
 import { dissociateTokenTemplate } from "../../templates";
 

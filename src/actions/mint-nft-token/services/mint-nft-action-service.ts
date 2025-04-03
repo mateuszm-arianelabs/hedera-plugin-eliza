@@ -1,6 +1,5 @@
 import { HederaProvider } from "../../../providers/client";
-import { HederaAgentKit } from "hedera-agent-kit";
-import { MintTokenResult } from "hedera-agent-kit/src/types";
+import { MintTokenResult } from "hedera-agent-kit";
 import { HederaMintNFTTokenParams } from "../types.ts";
 import { TokenId } from "@hashgraph/sdk";
 
@@ -12,8 +11,7 @@ export class MintNftActionService {
     async execute(
         params: HederaMintNFTTokenParams,
     ): Promise<MintTokenResult> {
-        const agentKit: HederaAgentKit =
-            this.hederaProvider.getHederaAgentKit();
+        const agentKit = this.hederaProvider.getHederaAgentKit();
 
         return agentKit.mintNFTToken(
             TokenId.fromString(params.tokenId),
