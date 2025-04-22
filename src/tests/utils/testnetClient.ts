@@ -17,7 +17,13 @@ import {
     HederaAgentKit,
     HederaNetworkType,
 } from "hedera-agent-kit";
-import { AirdropRecipient, SubmitMessageResult } from "hedera-agent-kit";
+import { SubmitMessageResult } from "hedera-agent-kit";
+
+interface AirdropRecipient {
+    accountId: string | AccountId;
+    amount: number;
+}
+
 export class NetworkClientWrapper {
     private readonly accountId: AccountId;
     private readonly privateKey: PrivateKey;
@@ -83,7 +89,7 @@ export class NetworkClientWrapper {
 
     async createFT(options: CreateFTOptions): Promise<string> {
         const result = await this.agentKit.createFT(options);
-        return result.tokenId.toString();
+        return result.getRawResponse().toString();
     }
 
     async transferToken(
@@ -91,8 +97,10 @@ export class NetworkClientWrapper {
         tokenId: string,
         amount: number
     ): Promise<void> {
+        const tokeneeasd = TokenId.fromString(tokenId)
+
         await this.agentKit.transferToken(
-            TokenId.fromString(tokenId),
+            tokeneeasd,
             receiverId,
             amount
         );
