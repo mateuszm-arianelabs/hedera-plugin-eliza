@@ -19,8 +19,7 @@ export const initAgentKit = (_runtime: IAgentRuntime): HederaAgentKit => {
     const accountID = _runtime.getSetting("HEDERA_ACCOUNT_ID");
     const privateKeyString = _runtime.getSetting("HEDERA_PRIVATE_KEY");
     const privateKeyType = _runtime.getSetting("HEDERA_KEY_TYPE");
-    const publicKey = _runtime.getSetting("HEDERA_PUBLIC_KEY");
-    const networkType = _runtime.getSetting("HEDERA_NETWORK_TYPE") as
+    const networkType = _runtime.getSetting("HEDERA_NETWORK") as
         | "mainnet"
         | "testnet"
         | "previewnet";
@@ -34,7 +33,6 @@ export const initAgentKit = (_runtime: IAgentRuntime): HederaAgentKit => {
         hederaAgentKit = new HederaAgentKit(
             accountID,
             hederaPrivateKey.privateKey.toStringDer(),
-            publicKey,
             networkType
         );
     } catch (error) {

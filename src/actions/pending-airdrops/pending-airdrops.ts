@@ -54,7 +54,7 @@ export const pendingAirdropsAction: Action = {
                 runtime.getSetting("HEDERA_ACCOUNT_ID");
 
             const networkType = runtime.getSetting(
-                "HEDERA_NETWORK_TYPE"
+                "HEDERA_NETWORK"
             ) as HederaNetworkType;
 
             const hederaProvider = new HederaProvider(runtime);
@@ -111,7 +111,7 @@ export const pendingAirdropsAction: Action = {
     validate: async (runtime: IAgentRuntime) => {
         const privateKey = runtime.getSetting("HEDERA_PRIVATE_KEY");
         const accountAddress = runtime.getSetting("HEDERA_ACCOUNT_ID");
-        const selectedNetworkType = runtime.getSetting("HEDERA_NETWORK_TYPE");
+        const selectedNetworkType = runtime.getSetting("HEDERA_NETWORK");
 
         return !!(privateKey && accountAddress && selectedNetworkType);
     },

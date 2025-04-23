@@ -18,7 +18,7 @@ describe("mint_fungible_token", () => {
     beforeAll(async () => {
         try {
             hederaMirrorNodeClient = new HederaMirrorNodeClient(
-                process.env.HEDERA_NETWORK_TYPE as
+                process.env.HEDERA_NETWORK as
                     | "testnet"
                     | "mainnet"
                     | "previewnet"

@@ -19,7 +19,7 @@ HEDERA_PRIVATE_KEY=
 HEDERA_ACCOUNT_ID=
 
 # accepts 'mainnet', 'testnet' or 'previewnet'
-HEDERA_NETWORK_TYPE=
+HEDERA_NETWORK=
 
 # accepts 'ECDSA' or 'ED25519'
 HEDERA_KEY_TYPE= 

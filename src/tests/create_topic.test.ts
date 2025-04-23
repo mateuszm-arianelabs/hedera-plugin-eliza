@@ -10,7 +10,7 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 dotenv.config();
 describe("create_topic", () => {
     let elizaOsApiClient: ElizaOSApiClient;
-    const hederaMirrorNodeClient = new HederaMirrorNodeClient(process.env.HEDERA_NETWORK_TYPE as NetworkType);
+    const hederaMirrorNodeClient = new HederaMirrorNodeClient(process.env.HEDERA_NETWORK as NetworkType);
     beforeAll(async () => {
         try {
             elizaOsApiClient = new ElizaOSApiClient(

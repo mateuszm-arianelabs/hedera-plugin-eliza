@@ -46,7 +46,7 @@ export const deleteTopicAction: Action = {
 
             const hederaProvider = new HederaProvider(runtime);
             const networkType = runtime.getSetting(
-                "HEDERA_NETWORK_TYPE"
+                "HEDERA_NETWORK"
             ) as HederaNetworkType;
 
             const action = new DeleteTopicService(hederaProvider);
@@ -75,7 +75,7 @@ export const deleteTopicAction: Action = {
     validate: async (runtime) => {
         const privateKey = runtime.getSetting("HEDERA_PRIVATE_KEY");
         const accountAddress = runtime.getSetting("HEDERA_ACCOUNT_ID");
-        const selectedNetworkType = runtime.getSetting("HEDERA_NETWORK_TYPE");
+        const selectedNetworkType = runtime.getSetting("HEDERA_NETWORK");
 
         return !!(privateKey && accountAddress && selectedNetworkType);
     },

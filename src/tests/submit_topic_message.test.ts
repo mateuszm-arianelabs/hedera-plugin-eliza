@@ -20,7 +20,7 @@ describe("submit_topic_message", () => {
     let testCases: { textPrompt: string; topicId: string; message: string }[];
     let networkClientWrapper: NetworkClientWrapper;
     const hederaMirrorNodeClient = new HederaMirrorNodeClient(
-        process.env.HEDERA_NETWORK_TYPE as NetworkType
+        process.env.HEDERA_NETWORK as NetworkType
     );
 
     beforeAll(async () => {
